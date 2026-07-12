@@ -1,0 +1,42 @@
+plugins {
+	id 'net.fabricmc.fabric-loom' version "${loom_version}"
+	id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+repositories {
+	maven { name = 'Terraformers'; url = 'https://maven.terraformersmc.com/releases/' }
+}
+
+loom {
+	splitEnvironmentSourceSets()
+	mods {
+		"tradewatch" {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
+		}
+	}
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+	compileOnly "com.terraformersmc:modmenu:20.0.1"
+}
+
+def modVersion = project.mod_version
+
+processResources {
+	inputs.property 'version', modVersion
+	filesMatching('fabric.mod.json') { expand 'version': modVersion }
+}
+
+tasks.withType(JavaCompile).configureEach { options.release = 25 }
+java { withSourcesJar(); sourceCompatibility = JavaVersion.VERSION_25; targetCompatibility = JavaVersion.VERSION_25 }
+
+jar {
+	from('LICENSE')
+}
