@@ -22,7 +22,7 @@ public final class TradeWatchClient implements ClientModInitializer {
         TradeWatchConfigManager.load();
         KeyMapping.Category category = KeyMapping.Category.register(net.minecraft.resources.Identifier.fromNamespaceAndPath("tradewatch", "general"));
         openKey = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.tradewatch.open", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_G, category));
-        ClientTickEvents.END_CLIENT_TICK.register(client -> { while (openKey.consumeClick()) Minecraft.getInstance().setScreenAndShow(new TradeWatchScreen(client.gui.screen())); TradeWatchConfigManager.validateRuntimeEntries(); MerchantScreenState.tick(client); });
+        ClientTickEvents.END_CLIENT_TICK.register(client -> { while (openKey.consumeClick()) Minecraft.getInstance().setScreenAndShow(new TradeWatchScreen(client.screen)); TradeWatchConfigManager.validateRuntimeEntries(); MerchantScreenState.tick(client); });
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> TradeWatchCommand.register(dispatcher));
     }
 }

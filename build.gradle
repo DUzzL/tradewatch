@@ -24,14 +24,20 @@ dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
-	compileOnly "com.terraformersmc:modmenu:20.0.1"
+	compileOnly "com.terraformersmc:modmenu:18.0.0"
 }
 
 def modVersion = project.mod_version
 
 processResources {
 	inputs.property 'version', modVersion
-	filesMatching('fabric.mod.json') { expand 'version': modVersion }
+	inputs.property 'supported_minecraft_versions', project.supported_minecraft_versions
+	inputs.property 'fabric_api_min_version', project.fabric_api_min_version
+	filesMatching('fabric.mod.json') {
+		expand 'version': modVersion,
+				'supported_minecraft_versions': project.supported_minecraft_versions,
+				'fabric_api_min_version': project.fabric_api_min_version
+	}
 }
 
 tasks.withType(JavaCompile).configureEach { options.release = 25 }

@@ -1,10 +1,20 @@
 # TradeWatch
 
-TradeWatch is a client-side Fabric mod for Minecraft **26.2** that finds librarian enchanted-book trades you actually want. It never rerolls, clicks trades, interacts with blocks, breaks lecterns, or automates villagers.
+TradeWatch is a client-side Fabric mod for Minecraft **26.1**, **26.1.1**, and **26.1.2** that finds librarian enchanted-book trades you actually want. It never rerolls, clicks trades, interacts with blocks, breaks lecterns, or automates villagers.
 
 ## Requirements
 
-Minecraft 26.2, Fabric Loader, and Fabric API are required. Mod Menu is optional.
+Minecraft 26.1, 26.1.1, or 26.1.2, Fabric Loader 0.19.3 or newer, and the matching Fabric API release are required. One TradeWatch JAR supports all three versions. Mod Menu is optional.
+
+## Building
+
+The single distributable JAR is compiled against Minecraft 26.1, the oldest supported API level:
+
+```powershell
+.\gradlew.bat build
+```
+
+Install the Fabric API release matching the selected Minecraft version: `0.145.1+26.1`, `0.145.4+26.1.1`, or `0.154.2+26.1.2`.
 
 ## Using TradeWatch
 
@@ -27,13 +37,3 @@ Wishlist entries use Minecraft registry identifiers and independent prices per l
 ```
 
 `add` validates the runtime registry identifier, supported level, and 1–64 price. The exact `price:32` syntax is required. `remove <enchantment>` removes every watched level for that enchantment; `remove <enchantment> <level>` only removes that level. `clear` requires the explicit `confirm` literal. Prices are configured per enchantment level, not globally.
-
-## Build
-
-Install JDK 25 and run:
-
-```
-./gradlew build
-```
-
-

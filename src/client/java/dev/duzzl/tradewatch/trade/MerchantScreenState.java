@@ -4,6 +4,7 @@ import dev.duzzl.tradewatch.config.TradeWatchConfigManager;
 import dev.duzzl.tradewatch.util.RomanNumerals;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.gui.screens.inventory.MerchantScreen;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
@@ -26,7 +27,7 @@ public final class MerchantScreenState {
     private static String stopText = "";
     private MerchantScreenState() { }
     public static void tick(Minecraft client) {
-        if (!(client.gui.screen() instanceof MerchantScreen screen)) { reset(); return; }
+        if (!(client.screen instanceof MerchantScreen screen)) { reset(); return; }
         if (screen != activeScreen) { activeScreen = screen; matches.clear(); matchingOfferIndices.clear(); notified = false; offerSignature = Integer.MIN_VALUE; }
         if (screen.getMenu().getOffers().isEmpty()) return;
         int currentSignature = signature(screen);
@@ -35,7 +36,7 @@ public final class MerchantScreenState {
         matches.clear();
         matches.addAll(TradeMatcher.findMatches(screen.getMenu().getOffers()));
         rebuildDisplayCache();
-        if (!notified && !matches.isEmpty()) { notified = true; if (client.player != null) client.player.playSound(SoundEvents.NOTE_BLOCK_PLING.value(), 0.65f, 1.25f); }
+        if (!notified && !matches.isEmpty()) { notified = true; client.getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.NOTE_BLOCK_PLING.value(), 1.25f, 0.65f)); }
     }
     public static boolean isMatch(int index) { return matchingOfferIndices.contains(index); }
     public static void extractOverlay(GuiGraphicsExtractor graphics, int width, int height) {
