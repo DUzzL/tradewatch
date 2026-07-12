@@ -1,7 +1,0 @@
-{
-  "required": true,
-  "package": "dev.duzzl.tradewatch.mixin",
-  "compatibilityLevel": "JAVA_25",
-  "client": ["MerchantScreenMixin"],
-  "injectors": { "defaultRequire": 1 }
-}
