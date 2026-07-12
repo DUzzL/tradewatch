@@ -1,6 +1,6 @@
 # TradeWatch
 
-TradeWatch is a client-side Fabric mod for Minecraft **26.2** that finds librarian enchanted-book trades you actually want. It never rerolls, clicks trades, interacts with blocks, breaks lecterns, or automates villagers.
+TradeWatch is a client-side Fabric mod for Minecraft **26.1.x** that finds librarian enchanted-book trades you actually want. It never rerolls, clicks trades, interacts with blocks, breaks lecterns, or automates villagers.
 
 ## Requirements
 
